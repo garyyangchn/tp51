@@ -1,0 +1,51 @@
+<html>
+<head>
+    <title>平台注册</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <meta name="description" content="Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
+">
+
+    <link rel="stylesheet" href="http://www.alarmlab.net/static/dist/lib/weui.min.css">
+    <link rel="stylesheet" href="http://www.alarmlab.net/static/dist/css/jquery-weui.css">
+    <link rel="stylesheet" href="http://www.alarmlab.net/static/dist/demos/css/demos.css">
+
+</head>
+<body ontouchstart>
+<header class='demos-header'>
+    <h3 class="demos-title">标志物联网</h3>
+    <h1 class="demos-title">公司注册</h1>
+    <p class='demos-sub-title'>极简的物联网平台</p>
+</header>
+
+<div class="weui-cells__title">程序猿吃饭去了，请稍后再试</div>
+
+<div class="weui-footer">
+    <div class="weui-btn-area">
+        <a class="weui-btn weui-btn_primary" href="javascript:" id="show-loading" >返回</a>
+    </div>
+
+    <p class="weui-footer__links">
+        <a href="http://www.iconics.com.cn" class="weui-footer__link">北京标志卓信科技有限公司</a>
+    </p>
+    <p class="weui-footer__text">Copyright © 2019 iconics.com.cn</p>
+</div>
+
+<style>
+    .weui-footer {
+        margin: 25px 0 10px 0;
+    }
+</style>
+
+
+<script src="http://www.alarmlab.net/static/dist/lib/jquery-2.1.4.js"></script>
+<script src="http://www.alarmlab.net/static/dist/js/jquery-weui.js"></script>
+<script type="text/javascript">
+    $(document).on("click", "#show-loading", function() {
+        WeixinJSBridge.call('closeWindow');
+    });
+</script>
+</body>
+</html>

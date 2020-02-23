@@ -1,0 +1,315 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
+    <title>Security Login</title>
+    <link rel="stylesheet" href="http://127.0.0.1/Anyglass/css/login.css" type="text/css" />
+</head>
+<body>
+<div>
+    <div class="outer">
+        <div class="middle">
+            <div class="inner">
+                <div class="wrapper">
+                    <div>
+                        <form id="LoginForm" action="#" method="POST">
+                            <fieldset>
+                                <legend>Log in</legend>
+                                <p class="error-message"></p>
+                                <div class="form-group">
+                                    <div class="control-wrap">
+                                        <input type="text" class="form-control" id="username" name="username" placeholder="Username" required="" maxlength="256">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div>
+                                        <input type="password" class="form-control" id="password" name="password" placeholder="Password" required="" maxlength="32">
+                                    </div>
+                                </div>
+
+                                <input id="platform" type="hidden" name="platform" value="" />
+
+                                <div class="form-group">
+                                    <div>
+                                        <button id="LoginButton" type="submit"> Log in </button>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </form>
+
+
+                        <form id="ChangePasswordForm" action="#" method="POST" style="display:none;">
+                            <fieldset>
+                                <legend>Change Password</legend>
+                                <p class="error-message"></p>
+                                <div class="form-group">
+                                    <div class="control-wrap">
+                                        <input type="password" class="form-control" id="p1" name="p1" placeholder="New Password" required="" maxlength="32">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div>
+                                        <input type="password" class="form-control" id="p2" name="p2" placeholder="Repeat New Password" required="" maxlength="32">
+                                    </div>
+                                </div>
+
+                                <input id="platform2" type="hidden" name="platform" value="" />
+                                <input id="username2" type="hidden" name="username" value="" />
+                                <input id="password2" type="hidden" name="password" value="" />
+
+                                <div class="form-group">
+                                    <div>
+                                        <button id="ChangePasswordButton" type="submit"> Change password </button>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+
+    window.$ = document.querySelectorAll.bind(document);
+    alert("message");
+
+    Node.prototype.on = window.on = function (name, fn) {
+        this.addEventListener(name, fn);
+    }
+
+    NodeList.prototype.__proto__ = Array.prototype;
+
+    NodeList.prototype.on = NodeList.prototype.addEventListener = function (name, fn) {
+        this.forEach(function (elem, i) {
+            elem.on(name, fn);
+        });
+    }
+
+    function getFormData(form) {
+        var obj = {};
+        var elements = form.querySelectorAll("input, select, textarea");
+        for (var i = 0; i < elements.length; ++i) {
+            var element = elements[i];
+            var name = element.name;
+            var value = element.value;
+
+            if (name) {
+                obj[name] = value;
+            }
+        }
+
+        return obj;
+    }
+
+    var ajax = {};
+    ajax.x = function () {
+        if (typeof XMLHttpRequest !== 'undefined') {
+            return new XMLHttpRequest();
+        }
+        var versions = [
+            "MSXML2.XmlHttp.6.0",
+            "MSXML2.XmlHttp.5.0",
+            "MSXML2.XmlHttp.4.0",
+            "MSXML2.XmlHttp.3.0",
+            "MSXML2.XmlHttp.2.0",
+            "Microsoft.XmlHttp"
+        ];
+
+        var xhr;
+        for (var i = 0; i < versions.length; i++) {
+            try {
+                xhr = new ActiveXObject(versions[i]);
+                break;
+            } catch (e) {
+            }
+        }
+        return xhr;
+    };
+
+    ajax.send = function (url, callback, method, data, async) {
+        if (async === undefined) {
+            async = true;
+        }
+        var x = ajax.x();
+        x.open(method, url, async);
+        x.onreadystatechange = function () {
+            if (x.readyState == 4) {
+                callback(x.responseText)
+            }
+        };
+        if (method == 'POST') {
+            x.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        }
+        x.send(data)
+    };
+
+    ajax.get = function (url, data, callback, async) {
+        var query = [];
+        for (var key in data) {
+            query.push(encodeURIComponent(key) + '=' + encodeURIComponent(data[key]));
+        }
+        ajax.send(url + (query.length ? '?' + query.join('&') : ''), callback, 'GET', null, async)
+    };
+
+    ajax.post = function (url, data, callback, async) {
+        var query = [];
+        for (var key in data) {
+            query.push(encodeURIComponent(key) + '=' + encodeURIComponent(data[key]));
+        }
+        ajax.send(url, callback, 'POST', query.join('&'), async)
+    };
+
+    var ico = ico || {};
+
+    ico.appPath = 'http://127.0.0.1/AnyGlass/';
+    ico.errorMessage = 'Security Service denied file access to "main.gdfxp".';
+    ico.platform = 'webhmiAG-';
+
+
+    // app logic
+
+    function setChangePasswordVisibility(visible) {
+        if (visible) {
+            document.getElementById("LoginForm").style.display = "none";
+            document.getElementById("ChangePasswordForm").style.display = "block";
+        }
+        else {
+            document.getElementById("LoginForm").style.display = "block";
+            document.getElementById("ChangePasswordForm").style.display = "none";
+        }
+    }
+
+    function doPasswordChange() {
+
+        var callback = function (res) {
+            if (res) {
+                res = JSON.parse(res);
+            }
+            if (res.code) {
+                if (res.code == 200) {
+
+                    $("#password")[0].value = $("#p1")[0].value;
+
+                    doLogin();
+                }
+                else {
+
+                }
+            }
+            else {
+                console.log("login error");
+            }
+
+            document.getElementById('ChangePasswordButton').removeAttribute("disabled");
+        };
+
+        ajax.post(
+            ico.appPath + 'account/changepasswd',
+            getFormData(document.getElementById('ChangePasswordForm')),
+            callback
+        );
+
+        document.getElementById('ChangePasswordButton').setAttribute('disabled', 'disabled');
+    };
+
+    function reload() {
+        if (location.search.length > 0) {
+            if (typeof URLSearchParams !== 'undefined') {
+                var t = new URLSearchParams(location.search);
+
+                if (t.has('r')) {
+                    var r = t.get('r');
+                    t.set('r', parseInt(r) + 1);
+                }
+                else {
+                    t.append('r', '2');
+                }
+                location.search = t.toString();
+            }
+            else {
+                location.search += "&r=2";
+            }
+        }
+        else {
+            location.search = "?r=2";
+        }
+    }
+
+    function doLogin() {
+
+        var callback = function (res) {
+            if (res) {
+                res = JSON.parse(res);
+            }
+            if (res.code) {
+                if (res.code == 200) {
+                    console.log("login OK");
+                    reload();
+                }
+                else {
+                    if (res.status == 2147483909 || res.status == 2147483907) {
+                        setChangePasswordVisibility(true);
+                    }
+
+                    $(".error-message")[0].innerText = res.result;
+                }
+            }
+            else {
+                console.log("login error");
+            }
+
+            document.getElementById('LoginButton').removeAttribute("disabled");
+        };
+
+        ajax.post(
+            ico.appPath + 'account/login',
+            getFormData($('#LoginForm')[0]),
+            callback
+        );
+
+        document.getElementById('LoginButton').setAttribute("disabled", "disabled");
+    };
+    //end of app logic
+
+
+    $('#LoginButton').on('click', function (e)
+    {
+        e.preventDefault();
+
+        doLogin();
+    });
+
+    $('#ChangePasswordButton').on('click', function (e) {
+        e.preventDefault();
+
+        var p1val = $("#p1")[0].value;
+        var p2val = $("#p2")[0].value;
+
+        if (p1val == p2val) {
+            $("#password2")[0].value = $("#password")[0].value;
+            $("#username2")[0].value = $("#username")[0].value;
+
+            doPasswordChange();
+        }
+        else {
+            $(".error-message").text("Passwords do not match.");
+        }
+    });
+
+    $('#platform')[0].value = ico.platform;
+    $('#platform2')[0].value = ico.platform;
+    $('#username')[0].focus();
+
+
+</script>
+</body>
+
+</html> 

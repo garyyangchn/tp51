@@ -1,0 +1,173 @@
+<html>
+<head>
+    <title>平台注册</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <meta name="description" content="Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
+">
+
+    <link rel="stylesheet" href="/static/dist/lib/weui.min.css">
+    <link rel="stylesheet" href="/static/dist/css/jquery-weui.css">
+    <link rel="stylesheet" href="/static/dist/demos/css/demos.css">
+
+</head>
+<body ontouchstart>
+<header class='demos-header'>
+    <h3 class="demos-title">标志物联网</h3>
+    <h1 class="demos-title">终端用户注册</h1>
+    <p class='demos-sub-title'>极简的物联网平台</p>
+</header>
+
+<div class="weui-cells__title">请填写以下必要信息</div>
+<div class="weui-cells weui-cells_form">
+
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">微信号</label></div>
+        <div class="weui-cell__bd">
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <p>{$name}</p>
+                    <p id="openid" hidden="hidden">{$openid}</p>
+                </div>
+                <div class="weui-cell__hd"><img src={$headimg} alt="icon" style="width:30%;margin-right:5px;display:block"></div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">公司ID</label></div>
+        <div class="weui-cell__bd">
+            <input id="companyid" class="weui-input" maxlength="10" type="tel" pattern="[0-9]*" placeholder="平台分配给贵公司的ID号">
+        </div>
+    </div>
+
+    <div class="weui-cell">
+        <div class="weui-cell__hd">
+            <label class="weui-label">姓名</label>
+        </div>
+        <div class="weui-cell__bd">
+            <input id="username" class="weui-input" type="text" placeholder="请输入您的名字">
+        </div>
+    </div>
+
+    <div class="weui-cell">
+        <div class="weui-cell__hd">
+            <label class="weui-label">手机号</label>
+        </div>
+        <div class="weui-cell__bd">
+            <input id="cellnumber" class="weui-input" type="tel" placeholder="请输入您的手机号码">
+        </div>
+    </div>
+
+    <div class="weui-cell">
+        <div class="weui-cell__hd">
+            <label class="weui-label">电子邮箱</label>
+        </div>
+        <div class="weui-cell__bd">
+            <input id="email" class="weui-input" type="email" placeholder="请输入您的电子邮箱">
+        </div>
+    </div>
+</div>
+
+<label for="weuiAgree2" class="weui-agree">
+    <input id="weuiAgree2" type="checkbox" class="weui-agree__checkbox">
+    <span class="weui-agree__text">阅读并同意<a href="javascript:void(0);">《相关条款》</a></span>
+</label>
+
+<div class="weui-footer">
+    <div class="weui-btn-area">
+        <a class="weui-btn weui-btn_primary" href="javascript:" id="show-loading" >向负责人发送校验码</a>
+    </div>
+
+    <p class="weui-footer__links">
+        <a href="http://www.iconics.com.cn" class="weui-footer__link">北京标志卓信科技有限公司</a>
+    </p>
+    <p class="weui-footer__text">Copyright © 2019 iconics.com.cn</p>
+</div>
+
+<style>
+    .weui-footer {
+        margin: 25px 0 10px 0;
+    }
+</style>
+
+
+<script src="/static/dist/lib/jquery-2.1.4.js"></script>
+<script src="/static/dist/js/jquery-weui.js"></script>
+<script type="text/javascript">
+    $(document).on("click", "#show-loading", function() {
+        //$.showLoading("正正正在注册");
+        //wxid = {$openid};
+
+        wxid = $("#openid").html();
+        if( wxid.length<1)
+        {
+            $.toptip("获取微信ID错误", "warning");
+            return;
+        }
+
+        companyid = $("#companyid").val();
+        if( companyid.length<1)
+        {
+            $.toptip("请输入公司ID", "warning");
+            return;
+        }
+
+        username = $("#username").val();
+        if( username.length<1)
+        {
+            $.toptip("请输入您的姓名", "warning");
+            return;
+        }
+
+        cellnum = $("#cellnumber").val();
+        if( cellnum.length<1)
+        {
+            $.toptip("请输入手机号码", "warning");
+            return;
+        }
+
+        email = $("#email").val();
+        if( email.length<1)
+        {
+            $.toptip("请输入电子邮箱", "warning");
+            return;
+        }
+
+        //$.toptip("开始提交注册", "warning");
+
+        var postModel = [];
+        postModel.push({companyid: companyid, cellnum:cellnum, email:email, wxid: wxid, username: username});
+        //postModel.push({c:3,d:4});
+        //$.toptip(postModel);
+        $.showLoading('用户注册中，请稍后');
+        $.post('http://www.softworx.cn/public/index.php/admin/userreg/cpregfun', {works: JSON.stringify(postModel)}, function (data) {
+            //alert(data);
+            //$("#ajaxret").html(data.two);
+            $.hideLoading();
+            //$.toptip(data);
+            if(data ==  'captcha' )
+            {
+                captchaPage = 'http://www.softworx.cn/public/index.php/admin/userreg/captcha?wxid=' + wxid;
+                $(location).attr('href', captchaPage);
+            }
+            else
+            {
+                if(data =='exist')
+                {
+                    $.toptip('贵公司已完成注册，无需再次注册','warning');
+                }
+                else
+                {
+                    $.toptip('注册失败，请检查贵公司ID及序列号','warning');
+                }
+            }
+
+        });
+    });
+</script>
+</body>
+</html>
