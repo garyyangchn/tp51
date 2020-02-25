@@ -6,7 +6,7 @@
       <change beforePath="$PROJECT_DIR$/application/index/controller/Companyreg.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/index/controller/Companyreg.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application/index/controller/Demo.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/index/controller/Demo.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application/index/controller/Userreg.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/index/controller/Userreg.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/index/model/wxadmin.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/index/model/wxadmin.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/index/view/userreg/regpage.html" beforeDir="false" afterPath="$PROJECT_DIR$/application/index/view/userreg/regpage.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/数据库设计.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/数据库设计.xlsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -104,7 +104,7 @@
       <workItem from="1582343034415" duration="31184000" />
       <workItem from="1582426862004" duration="28025000" />
       <workItem from="1582479944234" duration="180000" />
-      <workItem from="1582509508574" duration="25447000" />
+      <workItem from="1582509508574" duration="29376000" />
     </task>
     <servers />
   </component>
@@ -120,14 +120,14 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="699" y="322" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1582308167744" />
-    <state x="690" y="275" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1582449023052">
+    <state x="690" y="275" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1582646945972">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="690" y="275" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1582449023052" />
-    <state x="92" y="92" width="1736" height="856" key="DiffContextDialog" timestamp="1582471242611">
+    <state x="690" y="275" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1582646945972" />
+    <state x="92" y="92" width="1736" height="856" key="DiffContextDialog" timestamp="1582648272839">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="92" y="92" width="1736" height="856" key="DiffContextDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1582471242611" />
+    <state x="92" y="92" width="1736" height="856" key="DiffContextDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1582648272839" />
     <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1582446425298">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

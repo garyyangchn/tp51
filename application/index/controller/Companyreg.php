@@ -111,6 +111,7 @@ class Companyreg extends Controller
                 $obj = new wxadmin();
                 $obj->startTrans();
 
+                //插入wxadmin管理员表
                 IcoTrace::TraceMsgToDb('Companyreg.regcommit ==> After reg process after startTrans');
                 $regret = $obj->regprocess($arr['companyid'], $user['id'], $user['nickname'],$qret['userlimit'], $qret['msglimit']);
                 if( $regret == false )
@@ -121,17 +122,18 @@ class Companyreg extends Controller
                     return 'error';
                 }
 
+                //插入该公司报警数量统计表
                 $msgcountObj = new msgcount();
                 $msgret = $msgcountObj->addnewrecord($arr['companyid']);
                 if($msgret == false)
                 {
-                    //更新msglog表失败，回滚事务
+                    //更新msgcount表失败，回滚事务
                     IcoTrace::TraceMsgToDb('Companyreg.regcommit ==> addnewrecord 失败，回滚事务');
                     $obj->rollback();;
                     return 'error';
                 }
 
-                //更新msglog成功，提交事务
+                //更新msgcount成功，提交事务
                 $obj->commit();
 
                 IcoTrace::TraceMsgToDb('Companyreg.regcommit ==> regprocess successed!');

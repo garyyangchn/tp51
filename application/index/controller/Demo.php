@@ -142,5 +142,10 @@ class Demo
         return $retStep = wxuser::getRegStep('oN-721IBEltZQOsgRsPfncqp30pg');
     }
 
+    public function genregcode()
+    {
+        $str = substr(md5(time()), 0, 6);//md5加密，time()当前时间戳
+        return $str;
+    }
 
 }

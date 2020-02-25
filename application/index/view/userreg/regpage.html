@@ -140,18 +140,18 @@
         //$.toptip("开始提交注册", "warning");
 
         var postModel = [];
-        postModel.push({companyid: companyid, cellnum:cellnum, email:email, wxid: wxid, username: username});
+        postModel.push({companyid: companyid, cellnum:cellnum, email:email, username: username});
         //postModel.push({c:3,d:4});
         //$.toptip(postModel);
         $.showLoading('用户注册中，请稍后');
-        $.post('http://www.softworx.cn/public/index.php/admin/userreg/cpregfun', {works: JSON.stringify(postModel)}, function (data) {
+        $.post('/index/userreg/oncommit', {works: JSON.stringify(postModel)}, function (data) {
             //alert(data);
             //$("#ajaxret").html(data.two);
             $.hideLoading();
             //$.toptip(data);
             if(data ==  'captcha' )
             {
-                captchaPage = 'http://www.softworx.cn/public/index.php/admin/userreg/captcha?wxid=' + wxid;
+                captchaPage = '/index/userreg/captcha';
                 $(location).attr('href', captchaPage);
             }
             else
