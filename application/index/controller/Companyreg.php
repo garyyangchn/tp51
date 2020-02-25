@@ -4,10 +4,12 @@
 namespace app\index\controller;
 
 
+use app\index\model\msgcount;
 use app\index\model\poinfo;
 use app\index\model\wxadmin;
 use IcoTrace\IcoTrace;
 use think\Controller;
+use think\Db;
 use think\Exception;
 use think\facade\Session;
 use think\facade\Request;
@@ -97,14 +99,34 @@ class Companyreg extends Controller
 
                 //调用注册程序，首先获取微信账号的信息
                 $user = Session::get('wechat_user');
-                IcoTrace::TraceMsgToDb('Companyreg.regcommit ==> Begin reg process');
-                $regret = wxadmin::regprocess($arr['companyid'], $user['id']);
-                if( $regret != 1 )
+
+                IcoTrace::TraceMsgToDb('Companyreg.regcommit ==> Begin reg process before startTrans');
+                //开启注册事务
+                $obj = new wxadmin();
+                $obj->startTrans();
+
+                IcoTrace::TraceMsgToDb('Companyreg.regcommit ==> Begin reg process after startTrans');
+                $regret = $obj->regprocess($arr['companyid'], $user['id']);
+                if( $regret == false )
                 {
                     //插入注册数据失败
                     IcoTrace::TraceMsgToDb('Companyreg.regcommit ==> regprocess failed!');
+                    $obj->rollback();
                     return 'error';
                 }
+
+                $msgcountObj = new msgcount();
+                $msgret = $msgcountObj->addnewrecord($arr['companyid']);
+                if($msgret == false)
+                {
+                    //更新msglog表失败，回滚事务
+                    IcoTrace::TraceMsgToDb('Companyreg.regcommit ==> addnewrecord 失败，回滚事务');
+                    $obj->rollback();;
+                    return 'error';
+                }
+
+                //更新msglog成功，提交事务
+                $obj->commit();
 
                 IcoTrace::TraceMsgToDb('Companyreg.regcommit ==> regprocess successed!');
                 return 'ok';

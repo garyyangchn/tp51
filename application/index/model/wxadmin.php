@@ -82,28 +82,29 @@ class wxadmin extends Model
         return $ret;
     }
 
-    static public function regprocess( $companyid, $wxid)
+    public function regprocess( $companyid, $wxid)
     {
         try
         {
             IcoTrace::TraceMsgToDb('wxadmin.regprocess ==> Begin and compandid, wxid = '.$companyid.'  '.$wxid);
             $val = ['companyid'=>$companyid,'wxid'=>$wxid,'enable'=>'1','regtime'=>date('Y-m-d h:i:s', time())];
-            $ret = wxadmin::create($val);
-            if( $ret->isEmpty())
+
+            $ret = self::create($val);
+            if($ret->isEmpty())
             {
-                IcoTrace::TraceMsgToDb('wxadmin.regprocess ==> Inser failed ');
-                return 0;
+                return false;
             }
             else
             {
-                IcoTrace::TraceMsgToDb('wxadmin.regprocess ==> Inser sucessed ');
-                return 1;
+                return true;
             }
+            //return $ret;
+            return false;
         }
         catch (Exception $e)
         {
             IcoTrace::TraceMsgToDb('wxadmin.regprocess ==> exception = '. $e->getMessage());
-            return 0;
+            return false;
         }
     }
 
