@@ -124,4 +124,9 @@ class Demo
         return json_encode($ret);
         IcoTrace::TraceMsgToDb3('Demo.testupdate ==> update test');
     }
+
+    public function getcurrentcount()
+    {
+        return msgcount::getcurrentcount('100011');
+    }
 }

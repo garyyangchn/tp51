@@ -5,9 +5,8 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application/index/controller/Companyreg.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/index/controller/Companyreg.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application/index/controller/Demo.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/index/controller/Demo.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/index/model/wxadmin.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/index/model/wxadmin.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/index/model/msgcount.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/index/model/msgcount.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application/index/view/companyreg/regsuccess.html" beforeDir="false" afterPath="$PROJECT_DIR$/application/index/view/companyreg/regsuccess.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/extend/IcoTrace/IcoTrace.php" beforeDir="false" afterPath="$PROJECT_DIR$/extend/IcoTrace/IcoTrace.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -104,7 +103,7 @@
       <workItem from="1582343034415" duration="31184000" />
       <workItem from="1582426862004" duration="28025000" />
       <workItem from="1582479944234" duration="180000" />
-      <workItem from="1582509508574" duration="15790000" />
+      <workItem from="1582509508574" duration="18564000" />
     </task>
     <servers />
   </component>

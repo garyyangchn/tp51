@@ -32,6 +32,24 @@ class msgcount extends Model
         }
     }
 
+    static public function getcurrentcount($companyid)
+    {
+        $map = ['companyid'=>$companyid,'active'=>'1'];
+        IcoTrace::TraceMsgToDb('msgcount.getcurrentcount ==>Begin');
+        $ret = msgcount::where($map)->findOrEmpty();
+        IcoTrace::TraceMsgToDb('msgcount.getcurrentcount ==> After findOrEnpty ');
+        if($ret->isEmpty())
+        {
+            IcoTrace::TraceMsgToDb('msgcount.getcurrentcount ==> is empty ');
+            return 0;
+        }
+        else
+        {
+            IcoTrace::TraceMsgToDb('msgcount.getcurrentcount ==> get current msg count '. json_encode($ret->curmsgcount));
+            return $ret->curmsgcount;
+        }
+    }
+
     public function addnewrecord2($companyid, $msglimit)
     {
         try {

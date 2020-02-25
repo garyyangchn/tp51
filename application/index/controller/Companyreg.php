@@ -35,6 +35,7 @@ class Companyreg extends Controller
             $this->assign('companyid', $cpy['companyid']);
             $this->assign('cpname', $cpy['company']);
             $this->assign('usercount', $cpy['userlimit']);
+
             $this->assign('currentcount', 0);
             $this->assign('starttime', $cpy['startdate']);
             //计算结束日期
@@ -42,6 +43,11 @@ class Companyreg extends Controller
             $enddate = date('Y-m-d', strtotime ('+'.$validperiod.'day', strtotime($cpy['startdate'])));
             IcoTrace::TraceMsgToDb('Companyreg.regsuccess ==> end date = '. $enddate);
             $this->assign('endtime', $enddate);
+
+            $this->assign('msglimit', $cpy['msglimit']);
+            $msgcount = msgcount::getcurrentcount($cpy['companyid']);
+            $this->assign('msgsend', $msgcount);
+
             return $this->view->fetch();
         }
         catch (Exception $e)
