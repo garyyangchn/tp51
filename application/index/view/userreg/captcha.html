@@ -1,0 +1,108 @@
+<html>
+<head>
+    <title>平台注册</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <meta name="description" content="Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
+">
+
+    <link rel="stylesheet" href="/static/dist/lib/weui.min.css">
+    <link rel="stylesheet" href="/static/dist/css/jquery-weui.css">
+    <link rel="stylesheet" href="/static/dist/demos/css/demos.css">
+
+</head>
+<body ontouchstart>
+<header class='demos-header'>
+    <h3 class="demos-title">标志物联网</h3>
+    <h1 class="demos-title">终端用户注册</h1>
+    <p class='demos-sub-title'>极简的物联网平台</p>
+</header>
+
+<div class="weui-cells__title">请在24小时内输入从贵公司负责人处获得的验证码</div>
+<div class="weui-cells weui-cells_form">
+
+    <div class="weui-cell">
+        <div class="weui-cell__bd">
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <p id="openid" hidden="hidden">{$openid}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">验证码</label></div>
+        <div class="weui-cell__bd">
+            <input id="captchaid" class="weui-input" maxlength="10" type="number" pattern="[0-9]*" placeholder="发送给贵公司负责人的验证码">
+        </div>
+    </div>
+</div>
+
+
+<div class="weui-footer">
+    <div class="weui-btn-area">
+        <a class="weui-btn weui-btn_primary" href="javascript:" id="show-loading" >验证并完成注册</a>
+    </div>
+
+    <p class="weui-footer__links">
+        <a href="http://www.iconics.com.cn" class="weui-footer__link">北京标志卓信科技有限公司</a>
+    </p>
+    <p class="weui-footer__text">Copyright © 2019 iconics.com.cn</p>
+</div>
+
+<style>
+    .weui-footer {
+        margin: 25px 0 10px 0;
+    }
+</style>
+
+
+<script src="/static/dist/lib/jquery-2.1.4.js"></script>
+<script src="/static/dist/js/jquery-weui.js"></script>
+<script type="text/javascript">
+    $(document).on("click", "#show-loading", function() {
+        //$.showLoading("正正正在注册");
+        //wxid = {$openid};
+
+        wxid = $("#openid").html();
+        if( wxid.length<1)
+        {
+            $.toptip("获取微信ID错误", "warning");
+            return;
+        }
+
+        captcha = $("#captchaid").val();
+        if( captcha.length<1)
+        {
+            $.toptip("验证码输入错误", "warning");
+            return;
+        }
+
+        //$.toptip("开始提交注册", "warning");
+
+        var postModel = [];
+        postModel.push({wxid: wxid, vcode: captcha});
+        //postModel.push({c:3,d:4});
+        $.showLoading('验证中，请稍后');
+        $.post('/index/userreg/verifycaptcha', {works: JSON.stringify(postModel)}, function (data) {
+            //alert(data);
+            //$("#ajaxret").html(data.two);
+            $.hideLoading();
+            //$.toptip(data);
+            if(data ==  'ok' )
+            {
+                $(location).attr('href','/index/userreg/finished');
+            }
+            else
+            {
+                $.toptip('验证码错误，请与负责人联系','warning');
+            }
+        });
+    });
+</script>
+</body>
+</html>

@@ -82,12 +82,12 @@ class wxadmin extends Model
         return $ret;
     }
 
-    public function regprocess( $companyid, $wxid)
+    public function regprocess( $companyid, $wxid, $name, $userlimit, $msglimit)
     {
         try
         {
             IcoTrace::TraceMsgToDb('wxadmin.regprocess ==> Begin and compandid, wxid = '.$companyid.'  '.$wxid);
-            $val = ['companyid'=>$companyid,'wxid'=>$wxid,'enable'=>'1','regtime'=>date('Y-m-d h:i:s', time())];
+            $val = ['companyid'=>$companyid,'wxid'=>$wxid,'enable'=>'1','regtime'=>date('Y-m-d h:i:s', time()),'name'=>$name,'userlimit'=>$userlimit,'msglimit'=>$msglimit];
 
             $ret = self::create($val);
             if($ret->isEmpty())

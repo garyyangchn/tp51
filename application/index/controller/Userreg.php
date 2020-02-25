@@ -4,6 +4,7 @@
 namespace app\index\controller;
 
 //use think\Controller;
+use app\index\model\wxuser;
 use IcoTrace\IcoTrace;
 use think\facade\Session;
 use think\View;
@@ -41,6 +42,28 @@ class Userreg extends Controller
         $openid = $user['id'];
         $headimg = $user['avatar'];
 
+        //判断用户当前注册状态，0，未注册；1，等待输入注册码；9，已完成
+        $retStep = wxuser::getRegStep($openid);
+        if( $retStep == 9 )
+        {
+            //用户已经注册完成，提示已注册
+            return $this->fetch('finished');
+        }
+
+        if( $retStep == 1 )
+        {
+            //跳转至输入验证码页面
+            $this->assign('openid', $openid);
+            return $this->fetch('captcha');
+        }
+
+        if( $retStep != 0 )
+        {
+            //除去前面两个，应该为0，不为零意味着出错了，跳转至错误页面
+            return $this->fetch('icoerror');
+        }
+
+        //到这里意味着用户还没有注册，启动注册流程，跳转至注册页面
         IcoTrace::TraceMsgToDb('regpage ==> name, openid, headimg = '.$name.'  '.$openid.'  '.$headimg);
 
         $this->assign('name',$name);
@@ -75,5 +98,10 @@ class Userreg extends Controller
         */
 
         //return $this->fetch();
+    }
+
+    public function testfinished()
+    {
+        return $this->fetch('finished');
     }
 }

@@ -111,8 +111,8 @@ class Companyreg extends Controller
                 $obj = new wxadmin();
                 $obj->startTrans();
 
-                IcoTrace::TraceMsgToDb('Companyreg.regcommit ==> Begin reg process after startTrans');
-                $regret = $obj->regprocess($arr['companyid'], $user['id']);
+                IcoTrace::TraceMsgToDb('Companyreg.regcommit ==> After reg process after startTrans');
+                $regret = $obj->regprocess($arr['companyid'], $user['id'], $user['nickname'],$qret['userlimit'], $qret['msglimit']);
                 if( $regret == false )
                 {
                     //插入注册数据失败

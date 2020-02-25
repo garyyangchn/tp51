@@ -5,8 +5,9 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application/index/controller/Companyreg.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/index/controller/Companyreg.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application/index/controller/Demo.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/index/controller/Demo.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/index/model/msgcount.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/index/model/msgcount.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/index/view/companyreg/regsuccess.html" beforeDir="false" afterPath="$PROJECT_DIR$/application/index/view/companyreg/regsuccess.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/index/controller/Userreg.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/index/controller/Userreg.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/index/model/wxadmin.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/index/model/wxadmin.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/数据库设计.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/数据库设计.xlsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -103,7 +104,7 @@
       <workItem from="1582343034415" duration="31184000" />
       <workItem from="1582426862004" duration="28025000" />
       <workItem from="1582479944234" duration="180000" />
-      <workItem from="1582509508574" duration="18564000" />
+      <workItem from="1582509508574" duration="25447000" />
     </task>
     <servers />
   </component>
@@ -131,10 +132,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1582446425298" />
-    <state x="683" y="333" key="NewPhpClassDialog" timestamp="1582608179114">
+    <state x="683" y="333" key="NewPhpClassDialog" timestamp="1582641154075">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="683" y="333" key="NewPhpClassDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1582608179114" />
+    <state x="683" y="333" key="NewPhpClassDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1582641154075" />
     <state x="776" y="443" key="NewPhpFileDialog" timestamp="1582358925569">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

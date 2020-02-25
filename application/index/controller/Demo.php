@@ -7,6 +7,7 @@ namespace app\index\controller;
 use app\index\model\msgcount;
 use app\index\model\poinfo;
 use app\index\model\wxadmin;
+use app\index\model\wxuser;
 use IcoTrace\IcoTrace;
 
 class Demo
@@ -129,4 +130,17 @@ class Demo
     {
         return msgcount::getcurrentcount('100011');
     }
+
+    public function getWxAdminRecord()
+    {
+        wxuser::querySomeTable('100011');
+        return json_encode(wxuser::getWxAdminRecord());
+    }
+
+    public function getuserstatus()
+    {
+        return $retStep = wxuser::getRegStep('oN-721IBEltZQOsgRsPfncqp30pg');
+    }
+
+
 }
